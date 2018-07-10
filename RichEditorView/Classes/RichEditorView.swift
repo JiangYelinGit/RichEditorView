@@ -224,12 +224,16 @@ import UIKit
     }
 
     // MARK: Methods
-
+    public func getToolStatus() {
+        runJS("RE.getToolStatus();")
+    }
+    
     public func removeFormat() {
         runJS("RE.removeFormat();")
     }
     
     public func setFontSize(_ size: Int) {
+
         runJS("RE.setFontSize('\(size)px');")
     }
     

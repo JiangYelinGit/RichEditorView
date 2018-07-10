@@ -26,7 +26,32 @@ RE.editor = document.getElementById('editor');
 // Not universally supported, but seems to work in iOS 7 and 8
 document.addEventListener("selectionchange", function() {
     RE.backuprange();
+    var dic = {};
+    dic["fontSize"] = document.queryCommandValue('fontSize');
+    dic["bold"] = document.queryCommandState('bold');
+    dic["italic"] = document.queryCommandState('italic');
+    dic["underline"] = document.queryCommandState('underline');
+    dic["justifyLeft"] = document.queryCommandState('justifyLeft');
+    dic["justifyCenter"] = document.queryCommandState('justifyCenter');
+    dic["justifyRight"] = document.queryCommandState('justifyRight');
+    dic["foreColor"] = document.queryCommandValue('foreColor');
+    RE.customAction(JSON.stringify(dic));
+              
 });
+
+RE.getToolStatus = function() {
+    var dic = {};
+    dic["fontSize"] = document.queryCommandValue('fontSize');
+    dic["bold"] = document.queryCommandState('bold');
+    dic["italic"] = document.queryCommandState('italic');
+    dic["underline"] = document.queryCommandState('underline');
+    dic["justifyLeft"] = document.queryCommandState('justifyLeft');
+    dic["justifyCenter"] = document.queryCommandState('justifyCenter');
+    dic["justifyRight"] = document.queryCommandState('justifyRight');
+    dic["foreColor"] = document.queryCommandValue('foreColor');
+    RE.customAction(JSON.stringify(dic));
+};
+
 
 //looks specifically for a Range selection and not a Caret selection
 RE.rangeSelectionExists = function() {
@@ -134,7 +159,9 @@ RE.removeFormat = function() {
 };
 
 RE.setFontSize = function(size) {
-    RE.editor.style.fontSize = size;
+    document.execCommand("styleWithCSS", null, true);
+    document.execCommand('fontSize', false, size);
+    document.execCommand("styleWithCSS", null, true);
 };
 
 RE.setBackgroundColor = function(color) {
