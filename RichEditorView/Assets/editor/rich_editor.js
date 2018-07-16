@@ -181,11 +181,24 @@ RE.redo = function() {
 };
 
 RE.setBold = function() {
-    document.execCommand('bold', false, null);
+    
+    if (document.queryCommandState('bold')) {
+        document.execCommand('bold', false, null);
+        document.execCommand('insertHTML', false, '&zwnj;');
+    } else {
+        document.execCommand('bold', false, null);
+    }
+//    document.execCommand('bold', false, null);
 };
 
 RE.setItalic = function() {
-    document.execCommand('italic', false, null);
+    if (document.queryCommandState('italic')) {
+        document.execCommand('italic', false, null);
+        document.execCommand('insertHTML', false, '&zwnj;');
+    } else {
+        document.execCommand('italic', false, null);
+    }
+//    document.execCommand('itali c', false, null);
 };
 
 RE.setSubscript = function() {
@@ -201,7 +214,13 @@ RE.setStrikeThrough = function() {
 };
 
 RE.setUnderline = function() {
-    document.execCommand('underline', false, null);
+    if (document.queryCommandState('underline')) {
+        document.execCommand('underline', false, null);
+        document.execCommand('insertHTML', false, '&zwnj;');
+    } else {
+        document.execCommand('underline', false, null);
+    }
+//    document.execCommand('underline', false, null);
 };
 
 RE.setTextColor = function(color) {
